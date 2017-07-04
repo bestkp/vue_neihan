@@ -40,6 +40,46 @@ const routers = [
       title: '添加新闻'
     },
     component: (resolve) => require(['../views/addnews.vue'], resolve)
+  },
+  {
+    path: '/',
+    name: 'Home',
+    meta: {
+      title: '主页'
+    },
+    component: (resolve) => require(['../components/practise/Home.vue'], resolve)
+  },
+  {
+    path: '/categories',
+    name: 'Categories',
+    meta: {
+      title: '分类'
+    },
+    component: (resolve) => require(['../components/practise/Categories.vue'], resolve)
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    meta: {
+      title: '购物车'
+    },
+    component: (resolve) => require(['../components/practise/Cart.vue'], resolve)
+  },
+  {
+    path: '/me',
+    name: 'Me',
+    meta: {
+      title: '我的'
+    },
+    component: (resolve) => require(['../components/practise/Me.vue'], resolve)
+  },
+  {
+    path: '/books/:id',
+    name: 'BookDetails',
+    meta: {
+      title: '图书详情'
+    },
+    component: (resolve) => require(['../components/practise/BookDetails.vue'], resolve)
   }
 ];
 export default routers;
