@@ -1,10 +1,12 @@
 <template>
-    <div>
+    <div class="home-page">
         <div>首页</div>
     </div>
 </template>
-<style>
-    body{
+<style scoped lang="scss">
+  $color: red;
+    .home-page{
+      color: $color;
     }
 </style>
 <script>

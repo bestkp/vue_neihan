@@ -16,7 +16,7 @@
     "iview": "^2.0.0-rc.13",
     "less": "^2.7.2",
     "less-loader": "^4.0.2",
-    "mint-ui": "^2.2.1",
+    "mint-ui": "^2.2.7",
     "particles.js": "^2.0.0",
     "vee-validate": "^2.0.0-rc.3",
     "vue": "^2.2.2",

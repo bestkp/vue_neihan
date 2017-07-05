@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import store from './vuex/store';
-import iView from 'iview';
+import Mint from 'mint-ui';
 import VueRouter from 'vue-router';
 import Util from './utils/util';
 import Routers from './router/index';
@@ -18,13 +18,13 @@ const RouterConfig = {
 };
 const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
-  iView.LoadingBar.start();
+  // iView.LoadingBar.start();
   Util.title(to.meta.title);
   next();
 });
 
 router.afterEach((to, from, next) => {
-  iView.LoadingBar.finish();
+  // iView.LoadingBar.finish();
   window.scrollTo(0, 0);
 });
 // import * as filters from './util/filter'
