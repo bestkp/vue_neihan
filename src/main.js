@@ -10,8 +10,8 @@ import Routers from './router/index';
 // import VeeValidate, { Validator } from 'vee-validate';
 import './assets/js/validators'
 import messagesZH from './assets/js/zh_CN'
-import 'iview/dist/styles/iview.css';
-
+// import 'iview/dist/styles/iview.css';
+import 'mint-ui/lib/style.min.css'
 const RouterConfig = {
   mode: 'history',
   routes: Routers
@@ -29,7 +29,7 @@ router.afterEach((to, from, next) => {
 });
 // import * as filters from './util/filter'
 Vue.use(VueRouter);
-Vue.use(iView);
+Vue.use(Mint);
 //vee-validate
 // Vue.use(VeeValidate);
 // Validator.setLocale('zh');
