@@ -47,7 +47,6 @@
         msg:'hello world'
       }
     },
-
     components: {
       HeaderView
     }
