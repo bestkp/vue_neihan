@@ -1,46 +1,28 @@
-<style scoped lang="less">
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
+<style lang="scss">
+  @import "./assets/scss/reset";
+  .slide-fade-enter-active {
+    transition: all .3s ease;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-    opacity: 0
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
-
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(-430px);
+    opacity: 0;
+  }
+  #app {
+    height: 100%;}
 </style>
 <template>
-  <!--<div class="layout">
-    <transition name="fade" mode="out-in">
+
+  <div id="app">
+    <transition name="slide-fade">
       <router-view></router-view>
     </transition>
-  </div>-->
-  <div id="app">
-    <div class="tabs">
-      <ul>
-        <router-link :to="{name: 'Home'}" tag="li">
-          <div><img src="./assets/svg/home.svg" alt=""></div>
-          <div>首页</div>
-        </router-link>
-        <router-link :to="{name: 'Categories'}" tag="li">
-          <div><img src="./assets/svg/category.svg" alt=""></div>
-          <div>分类</div>
-        </router-link>
-        <router-link :to="{name: 'Cart'}" tag="li">
-          <div><img src="./assets/svg/cart.svg" alt=""></div>
-          <div>购物车</div>
-        </router-link>
-        <router-link :to="{name: 'Me'}" tag="li">
-          <div><img src="./assets/svg/me.svg" alt=""></div>
-          <div>我的</div>
-        </router-link>
-      </ul>
-    </div>
-    <div class="content">
-      <router-view></router-view>
-    </div>
   </div>
 </template>
 <script>
-  import HeaderView from './components/header.vue'
+  import HeaderView from './components/header.vue';
   export default {
     data() {
       return {
