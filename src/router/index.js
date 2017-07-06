@@ -40,6 +40,10 @@ const routers = [
       title: '图书详情'
     },
     component: (resolve) => require(['../components/practise/BookDetails.vue'], resolve)
+  },
+  {
+    path: '*',
+    component: (resolve) => require(['../components/practise/NotFound.vue'], resolve)
   }
 ];
 export default routers;
