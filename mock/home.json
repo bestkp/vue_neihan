@@ -1,0 +1,125 @@
+{
+  "announcement": "今日上架的图书全部8折.",
+  "slides": [
+    {
+      "id": 1,
+      "img_url": "/static/img/t1.106a672.svg"
+    },
+    {
+      "id": 2,
+      "img_url": "/static/img/t2.b4f9b1e.svg"
+    }
+  ],
+  "latestUpdated": [
+    {
+      "id": 1,
+      "title": "揭开数据真相：从小白到数据分析达人",
+      "authors": [
+        "Edward Zaccaro",
+        "Daniel Zaccaro"
+      ],
+      "img_url": "/static/img/1.3be74cb.svg"
+    },
+    {
+      "id": 2,
+      "title": "Android 高级进阶",
+      "authors": [
+        "顾浩鑫"
+      ],
+      "img_url": "/static/img/2.c0910ca.svg"
+    },
+    {
+      "id": 3,
+      "title": "淘宝天猫电商运行与数据化选品完全手册",
+      "authors": [
+        "老夏"
+      ],
+      "img_url": "/static/img/3.b9b2825.svg"
+    },
+    {
+      "id": 4,
+      "title": "大数据架构详解：从数据获取到深度学习",
+      "authors": [
+        "朱洁",
+        "罗华林o"
+      ],
+      "img_url": "/static/img/4.ac67f73.svg"
+    },
+    {
+      "id": 5,
+      "title": "Meteor 全栈开发",
+      "authors": [
+        "杜亦舒"
+      ],
+      "img_url": "/static/img/5.81aa69a.svg"
+    },
+    {
+      "id": 6,
+      "title": "Kubernetes权威指南：从Docker到Kubernetes实践全接触（第二版）",
+      "authors": [
+        "龚正",
+        "吴志辉",
+        "王伟",
+        "崔秀龙",
+        "闫建勇"
+      ],
+      "img_url": "/static/img/1.3be74cb.svg"
+    }
+  ],
+  "latestUpdatedb": [
+    {
+      "id": 6,
+      "title": "编辑推荐 Kubernetes权威指南：从Docker到Kubernetes实践全接触（第二版）",
+      "authors": [
+        "龚正",
+        "吴志辉",
+        "王伟",
+        "崔秀龙",
+        "闫建勇"
+      ],
+      "img_url": "/static/img/6.e682271.svg"
+    },
+    {
+      "id": 2,
+      "title": "编辑推荐 Android 高级进阶",
+      "authors": [
+        "顾浩鑫"
+      ],
+      "img_url": "/static/img/2.c0910ca.svg"
+    },
+    {
+      "id": 4,
+      "title": "编辑推荐 大数据架构详解：从数据获取到深度学习",
+      "authors": [
+        "朱洁",
+        "罗华林o"
+      ],
+      "img_url": "/static/img/6.e682271.svg"
+    },
+    {
+      "id": 1,
+      "title": "编辑推荐 揭开数据真相：从小白到数据分析达人",
+      "authors": [
+        "Edward Zaccaro",
+        "Daniel Zaccaro"
+      ],
+      "img_url": "/static/img/1.3be74cb.svg"
+    },
+    {
+      "id": 3,
+      "title": "编辑推荐 淘宝天猫电商运行与数据化选品完全手册",
+      "authors": [
+        "老夏"
+      ],
+      "img_url": "/static/img/3.b9b2825.svg"
+    },
+    {
+      "id": 5,
+      "title": "编辑推荐 Meteor 全栈开发",
+      "authors": [
+        "杜亦舒"
+      ],
+      "img_url": "/static/img/5.81aa69a.svg"
+    }
+  ]
+}
