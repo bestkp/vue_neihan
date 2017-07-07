@@ -8,13 +8,17 @@
   }
   .tabs {
     padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    height: 60px;
   }
   #main {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
     .content {
-      flex: 1;
+      margin-bottom: 70px;
     }
   }
 </style>
