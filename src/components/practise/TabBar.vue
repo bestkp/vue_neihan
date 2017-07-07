@@ -3,6 +3,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    border-top: 1px solid #999;
+    padding: 5px 20px;
   }
   li {
     .img {

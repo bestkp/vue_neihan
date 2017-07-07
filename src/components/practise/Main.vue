@@ -3,18 +3,16 @@
     transition: all .2s ease;
   }
   .slide-up-enter, .slide-up-leave-to {
-    transform: translateY(10px);
+    transform: translateY(20px);
     opacity: 0;
   }
   .tabs {
-    padding: 10px 20px;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     box-sizing: border-box;
     background: #fff;
-    height: 60px;
   }
   #main {
     .content {

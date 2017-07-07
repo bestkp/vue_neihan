@@ -10,28 +10,33 @@ import Routers from './router/index';
 // import VeeValidate, { Validator } from 'vee-validate';
 // import './assets/js/validators'
 import messagesZH from './assets/js/zh_CN'
-// import 'iview/dist/styles/iview.css';
 import 'mint-ui/lib/style.min.css'
-import 'normalize.css/normalize.css'
 const RouterConfig = {
   linkActiveClass: 'active',
   mode: 'history',
   routes: Routers
 };
 const router = new VueRouter(RouterConfig);
+
+// import * as filters from './util/filter'
+Vue.use(VueRouter);
+Vue.use(Mint);
 router.beforeEach((to, from, next) => {
-  // iView.LoadingBar.start();
+  // LoadingBar.start();
+  Mint.Indicator.open({
+    spinnerType: 'fading-circle'
+  });
   Util.title(to.meta.title);
   next();
 });
 
 router.afterEach((to, from, next) => {
-  // iView.LoadingBar.finish();
+  // LoadingBar.finish();
+  setTimeout(() => {
+    Mint.Indicator.close();
+  })
   window.scrollTo(0, 0);
 });
-// import * as filters from './util/filter'
-Vue.use(VueRouter);
-Vue.use(Mint);
 //vee-validate
 // Vue.use(VeeValidate);
 // Validator.setLocale('zh');
