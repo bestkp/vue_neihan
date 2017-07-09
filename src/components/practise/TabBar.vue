@@ -9,10 +9,14 @@
   li {
     .img {
       text-align: center;
+      img {
+        width: 28px;
+        height: 28px;
+      }
     }
   }
   li.active {
-    color: #00b283;
+    color: #00b28c;
 
   }
 </style>
