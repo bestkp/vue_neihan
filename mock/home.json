@@ -3,11 +3,13 @@
   "slides": [
     {
       "id": 1,
-      "img_url": "/static/img/t1.106a672.svg"
-    },
-    {
+      "img_url": "http://img62.ddimg.cn/upload_img/00478/0609/750x315-0705-zhc.jpg"
+    }, {
       "id": 2,
-      "img_url": "/static/img/t2.b4f9b1e.svg"
+      "img_url": "http://img63.ddimg.cn/upload_img/00316/zhulin/750x315_0630.jpg"
+    }, {
+      "id": 3,
+      "img_url": "http://img61.ddimg.cn/upload_img/00608/zyc/sandilei750_315.jpg"
     }
   ],
   "latestUpdated": [
@@ -18,7 +20,7 @@
         "Edward Zaccaro",
         "Daniel Zaccaro"
       ],
-      "img_url": "/static/img/1.3be74cb.svg"
+      "img_url": "http://img3x5.ddimg.cn/52/6/25096255-1_l_4.jpg"
     },
     {
       "id": 2,
@@ -26,7 +28,7 @@
       "authors": [
         "顾浩鑫"
       ],
-      "img_url": "/static/img/2.c0910ca.svg"
+      "img_url": "http://img3x5.ddimg.cn/52/6/25096255-1_l_4.jpg"
     },
     {
       "id": 3,
@@ -34,7 +36,7 @@
       "authors": [
         "老夏"
       ],
-      "img_url": "/static/img/3.b9b2825.svg"
+      "img_url": "http://img3x6.ddimg.cn/38/34/25097726-1_l_3.jpg"
     },
     {
       "id": 4,
@@ -43,7 +45,7 @@
         "朱洁",
         "罗华林o"
       ],
-      "img_url": "/static/img/4.ac67f73.svg"
+      "img_url": "http://img3x6.ddimg.cn/38/34/25097726-1_l_3.jpg"
     },
     {
       "id": 5,
@@ -51,7 +53,7 @@
       "authors": [
         "杜亦舒"
       ],
-      "img_url": "/static/img/5.81aa69a.svg"
+      "img_url": "http://img3x6.ddimg.cn/8/21/1900694276-1_l_1.jpg"
     },
     {
       "id": 6,
@@ -63,7 +65,7 @@
         "崔秀龙",
         "闫建勇"
       ],
-      "img_url": "/static/img/1.3be74cb.svg"
+      "img_url": "http://img3x4.ddimg.cn/95/8/25087784-1_l_7.jpg"
     }
   ],
   "latestUpdatedb": [
@@ -77,7 +79,7 @@
         "崔秀龙",
         "闫建勇"
       ],
-      "img_url": "/static/img/6.e682271.svg"
+      "img_url": "http://img3x5.ddimg.cn/58/23/23996965-1_l_12.jpg"
     },
     {
       "id": 2,
@@ -85,7 +87,7 @@
       "authors": [
         "顾浩鑫"
       ],
-      "img_url": "/static/img/2.c0910ca.svg"
+      "img_url": "http://img3x8.ddimg.cn/42/0/25079118-1_l_15.jpg"
     },
     {
       "id": 4,
@@ -94,7 +96,7 @@
         "朱洁",
         "罗华林o"
       ],
-      "img_url": "/static/img/6.e682271.svg"
+      "img_url": "http://img3x5.ddimg.cn/58/23/23996965-1_l_12.jpg"
     },
     {
       "id": 1,
@@ -103,7 +105,7 @@
         "Edward Zaccaro",
         "Daniel Zaccaro"
       ],
-      "img_url": "/static/img/1.3be74cb.svg"
+      "img_url": "http://img3x4.ddimg.cn/95/8/25087784-1_l_7.jpg"
     },
     {
       "id": 3,
@@ -111,7 +113,7 @@
       "authors": [
         "老夏"
       ],
-      "img_url": "/static/img/3.b9b2825.svg"
+      "img_url": "http://img3x8.ddimg.cn/42/0/25079118-1_l_15.jpg"
     },
     {
       "id": 5,
@@ -119,7 +121,7 @@
       "authors": [
         "杜亦舒"
       ],
-      "img_url": "/static/img/5.81aa69a.svg"
+      "img_url": "http://img3x6.ddimg.cn/8/21/1900694276-1_l_1.jpg"
     }
   ]
 }

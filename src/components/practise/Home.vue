@@ -24,7 +24,7 @@
 <style scoped lang="scss">
   .home-page{
     #mySwipe {
-      height: 125px;
+      height: 1.58rem;
       background: #fff;
     }
     .announcement {
@@ -44,14 +44,7 @@
 </style>
 <script>
   import { Swipe, SwipeItem } from 'mint-ui';
-  import t1 from '../../assets/fixtures/sliders/t1.svg'
-  import t2 from '../../assets/fixtures/sliders/t2.svg'
-  import c1 from '../../assets/fixtures/covers/1.svg'
-  import c2 from '../../assets/fixtures/covers/2.svg'
-  import c3 from '../../assets/fixtures/covers/3.svg'
-  import c4 from '../../assets/fixtures/covers/4.svg'
-  import c5 from '../../assets/fixtures/covers/5.svg'
-  import c6 from '../../assets/fixtures/covers/6.svg'
+
   import BookList from './BookList.vue'
   import axios from 'axios'
   export default{
