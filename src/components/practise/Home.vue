@@ -17,8 +17,19 @@
     </div>
     <div class="section">
       <!--编辑推荐-->
-      <book-list :latestUpdated="latestUpdatedb" heading="编辑推荐"></book-list>
+      <book-list :latestUpdated="latestUpdatedb" heading="编辑推荐" @onBookSelect="preview($event)"></book-list>
     </div>
+    <modal-dialog ref="dialog" @dialogClose="selected=undefined">
+      <div slot="heading">
+        <div class="dismiss" @click.prevent="$refs.dialog.close()">关闭</div>
+      </div>
+      <div>
+        <img :src="selected?selected.img_url:''" alt=""/>
+      </div>
+      <div>
+        {{selected ? selected.title : ''}}
+      </div>
+    </modal-dialog>
   </div>
 </template>
 <style scoped lang="scss">
@@ -40,16 +51,20 @@
       span {color: #666}
     }
   }
-
 </style>
 <script>
   import { Swipe, SwipeItem } from 'mint-ui';
-
+  import ModalDialog from './dialog.vue'
   import BookList from './BookList.vue'
   import axios from 'axios'
   export default{
     data(){
       return{
+        isopen: false,
+        selected: {
+          title: '',
+          img_url: ''
+        },
         announcement: '',
         slides: [],
         latestUpdated: [],
@@ -59,29 +74,31 @@
     components:{
       Swipe,
       SwipeItem,
-      BookList
+      BookList,
+      ModalDialog
     },
     methods: {
       handleChange(index) {
 //        console.log(index);
       },
       preview(book) {
-          alert('显示图书详情');
+        this.selected = book;
+        this.$refs.dialog.open();
       }
     },
     created() {
-        let self = this;
-        axios.get('/mock/home.json')
-          .then(res=>{
-              if(res.status === 200) {
-                  for(let prop in res.data) {
-                      self[prop] = res.data[prop]
-                  }
-              }
-          })
-          .catch(err=> {
-              console.log(`获取数据失败：${err}`);
-          })
+      let self = this;
+      axios.get('/mock/home.json')
+        .then(res=>{
+          if(res.status === 200) {
+            for(let prop in res.data) {
+              self[prop] = res.data[prop]
+            }
+          }
+        })
+        .catch(err=> {
+          console.log(`获取数据失败：${err}`);
+        })
     }
   }
 </script>
