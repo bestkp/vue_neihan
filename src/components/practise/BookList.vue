@@ -28,6 +28,11 @@
           text-align: left;
           @extend .nowrap;
         }
+        .couver {
+          img {
+            width: auto;
+          }
+        }
       }
     }
   }

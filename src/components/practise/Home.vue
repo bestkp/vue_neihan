@@ -8,7 +8,7 @@
       <!--快讯-->
       <div class="announcement">
         <label>快讯</label>
-        <span>{{announcement}}</span>
+        <span>{{announcement.text}}</span>
       </div>
     </div>
     <div class="section">
@@ -56,6 +56,7 @@
   import { Swipe, SwipeItem } from 'mint-ui';
   import ModalDialog from './dialog.vue'
   import BookList from './BookList.vue'
+  import faker from "../../assets/fixtures/faker"
   import axios from 'axios'
   export default{
     data(){
@@ -88,7 +89,7 @@
     },
     created() {
       let self = this;
-      axios.get('/mock/home.json')
+      /*axios.get('/mock/home.json')
         .then(res=>{
           if(res.status === 200) {
             for(let prop in res.data) {
@@ -98,7 +99,14 @@
         })
         .catch(err=> {
           console.log(`获取数据失败：${err}`);
-        })
+        })*/
+      const fakeData = faker.getHomeData();
+      console.log(fakeData)
+      self.announcement = fakeData.announcement;
+      self.slides = fakeData.top;
+      self.latestUpdated = fakeData.promotions;
+      self.latestUpdatedb = fakeData.promotions;
+      self.slides = fakeData.top;
     }
   }
 </script>
