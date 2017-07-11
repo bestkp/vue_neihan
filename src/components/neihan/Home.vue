@@ -5,7 +5,9 @@
     </ul>
     <mt-tab-container v-model="defaultTab">
       <mt-tab-container-item v-for="tab in tabs" :key="tab.umeng_event" :id="tab.umeng_event">
-        <mt-cell v-for="n in 10" title="tab-container 1"></mt-cell>
+        <mt-cell v-for="js in jokeList.data" title="tab-container 1">
+          {{js.type}}
+        </mt-cell>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -67,6 +69,7 @@
     },
     created() {
       this.getHomeTabs();
+      this.getJoke('recommend');
     }
   }
 </script>
