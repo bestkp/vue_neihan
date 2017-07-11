@@ -58,6 +58,7 @@
   import BookList from './BookList.vue'
   import faker from "../../assets/fixtures/faker"
   import axios from 'axios'
+  import {mapGetters} from 'vuex'
   export default{
     data(){
       return{
@@ -71,6 +72,14 @@
         latestUpdated: [],
         latestUpdatedb: []
       }
+    },
+    computed: {
+      ...mapGetters([
+          'announcements',
+          'promotions',
+          'recommended',
+          'promotionsCount'
+      ])
     },
     components:{
       Swipe,

@@ -5,45 +5,41 @@ const routers = [
     meta: {
       title: '主页'
     },
-    component: (resolve) => require(['../components/practise/Main.vue'], resolve),
-    children: [{
-      path: 'home',
-      name: 'Home',
-      meta: {title: '主页'},
-      component: (resolve) => require(['../components/practise/Home.vue'], resolve)
-    },{
-      path: '/categories',
-      name: 'Categories',
-      meta: {
-        title: '分类'
+    component: (resolve) => require(['../components/neihan/Main.vue'], resolve),
+    children: [
+      {
+        path: '/home',
+        name: 'Home',
+        meta: {
+          title: '首页'
+        },
+        component: (resolve) => require(['../components/neihan/Home.vue'], resolve)
       },
-      component: (resolve) => require(['../components/practise/Categories.vue'], resolve)
-    },{
-      path: '/cart',
-      name: 'Cart',
-      meta: {
-        title: '购物车'
+      {
+        path: '/show',
+        name: 'Show',
+        meta: {
+          title: '段友秀'
+        },
+        component: (resolve) => require(['../components/neihan/Show.vue'], resolve)
       },
-      component: (resolve) => require(['../components/practise/Cart.vue'], resolve)
-    },{
-      path: '/me',
-      name: 'Me',
-      meta: {
-        title: '我的'
+      {
+        path: '/find',
+        name: 'Find',
+        meta: {
+          title: '发现'
+        },
+        component: (resolve) => require(['../components/neihan/Find.vue'], resolve)
       },
-      component: (resolve) => require(['../components/practise/Me.vue'], resolve)
-    }]
-  }, {
-    path: '/books/:id',
-    name: 'BookDetails',
-    meta: {
-      title: '图书详情'
-    },
-    component: (resolve) => require(['../components/practise/BookDetails.vue'], resolve)
-  },
-  {
-    path: '*',
-    component: (resolve) => require(['../components/practise/NotFound.vue'], resolve)
+      {
+        path: '/me',
+        name: 'Me',
+        meta: {
+          title: '我的'
+        },
+        component: (resolve) => require(['../components/neihan/Me.vue'], resolve)
+      }
+    ]
   }
 ];
 export default routers;
@@ -90,3 +86,50 @@ export default routers;
  },
  component: (resolve) => require(['../views/addnews.vue'], resolve)
  },*/
+/***************************vue2 实践解密*****************************/
+/*{
+ path: '/',
+ name: 'Main',
+ meta: {
+ title: '主页'
+ },
+ component: (resolve) => require(['../components/practise/Main.vue'], resolve),
+ children: [{
+ path: 'home',
+ name: 'Home',
+ meta: {title: '主页'},
+ component: (resolve) => require(['../components/practise/Home.vue'], resolve)
+ },{
+ path: '/categories',
+ name: 'Categories',
+ meta: {
+ title: '分类'
+ },
+ component: (resolve) => require(['../components/practise/Categories.vue'], resolve)
+ },{
+ path: '/cart',
+ name: 'Cart',
+ meta: {
+ title: '购物车'
+ },
+ component: (resolve) => require(['../components/practise/Cart.vue'], resolve)
+ },{
+ path: '/me',
+ name: 'Me',
+ meta: {
+ title: '我的'
+ },
+ component: (resolve) => require(['../components/practise/Me.vue'], resolve)
+ }]
+ }, {
+ path: '/books/:id',
+ name: 'BookDetails',
+ meta: {
+ title: '图书详情'
+ },
+ component: (resolve) => require(['../components/practise/BookDetails.vue'], resolve)
+ },
+ {
+ path: '*',
+ component: (resolve) => require(['../components/practise/NotFound.vue'], resolve)
+ }*/

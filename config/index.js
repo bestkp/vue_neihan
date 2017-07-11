@@ -29,7 +29,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://bestkp.win:3000/',
+        target: 'http://iu.snssdk.com/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
