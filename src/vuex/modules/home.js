@@ -4,7 +4,7 @@ import urls from '../../utils/urls'
 export default {
   state: {
     tabs: [],
-    defaultTab: 0,
+    defaultTab: '',
     jokeList: []
   },
   getters: {
@@ -24,8 +24,8 @@ export default {
           console.log('tabs 接口出错')
         })
     },
-    changeDefault ({commit}, num) {
-      commit(types.CHANGE_DEFAULT, num)
+    changeDefault ({commit}, obj) {
+      commit(types.CHANGE_DEFAULT, obj)
     },
     getJoke({commit}, type) {
       let url = '/api';
@@ -61,7 +61,7 @@ export default {
       axios.get(url)
         .then((res) => {
           if(res.status === 200) {
-            debugger
+            console.log(res.data.data)
             commit(types.JOKE_LIST, res.data.data);
           }
         })
@@ -75,7 +75,7 @@ export default {
       state.tabs = data;
       for(let da in data) {
         if(data[da].is_default_tab === true) {
-          state.defaultTab = da;
+          state.defaultTab = data[da].umeng_event;
           break
         }
         state.defaultTab = 0
@@ -83,8 +83,8 @@ export default {
 
       console.log(data);
     },
-    [types.CHANGE_DEFAULT](state, n) {
-      state.defaultTab = n
+    [types.CHANGE_DEFAULT](state, o) {
+      state.defaultTab = o.umeng_event;
     },
     [types.JOKE_LIST](state, data) {
       state.jokeList = data
