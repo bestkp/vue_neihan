@@ -13,7 +13,8 @@ const routers = [
         meta: {
           title: '首页'
         },
-        component: (resolve) => require(['../components/neihan/Home.vue'], resolve)
+        component: (resolve) => require(['../components/neihan/Home.vue'], resolve),
+        children: []
       },
       {
         path: '/show',
