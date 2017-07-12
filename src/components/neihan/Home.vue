@@ -20,7 +20,7 @@
               <div class="user-name">
                 {{jl.group.user.name}}
               </div>
-              <div class="jubao">X</div>
+              <div class="dislike">X</div>
             </div>
             <div v-else>
 
@@ -37,12 +37,36 @@
   .home-page {
     background: #ccc;
     li {
-      padding: 10px 0;
       background: #fff;
       margin-bottom: 2px;
-      .user
+      padding: 5px 10px;
+      .joke-header {
+        display: flex;
+        justify-content: space-between;
+      }
+      .user-img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .user-name {
+        flex: 1;
+        line-height: 25px;
+        margin-left: 10px;
+        font-size: 14px;
+        color: #666;
+      }
+      .dislike {
+        border: 1px solid #333;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        border-radius: 5px;
+      }
     }
   }
+
   .tab-item {
     font-size: 16px;
   }
@@ -100,7 +124,7 @@
         this.getJoke(li.umeng_event);
       },
       loadMore() {
-          let self = this;
+        let self = this;
         this.loading = true;
 //        setTimeout(() => {
 //          let last = self.jokeList.data[self.jokeList.data.length - 1];
