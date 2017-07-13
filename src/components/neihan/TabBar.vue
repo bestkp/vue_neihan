@@ -10,10 +10,11 @@
     .img {
       text-align: center;
       img {
-        width: 28px;
-        height: 28px;
+        width: 20px;
+        height: 20px;
       }
     }
+    font-size: 14px;
   }
   li.active {
     color: #00b28c;
