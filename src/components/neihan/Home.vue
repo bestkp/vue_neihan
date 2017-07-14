@@ -5,105 +5,78 @@
         {{tab.name}}
       </mt-tab-item>
     </mt-navbar>
-    <!-- tab-container -->
-    <!--
-    digg_count: 被赞数
-    bury_count: 被贬数
-    comment_count: 评论数
-    share_count: 转发数
-    category_name: 标签名
-    has_comments: 有无神评
-    play_count: 播放量
-    label {
-      1: 热门
-      64： 同城
-    }
-    media_type {
-      0: 文本,
-      1: 图片,
-      2: gif
-      3: 视频
-      4：多图
-    }
-    -->
-    <mt-tab-container v-model="selected">
-      <mt-tab-container-item :id="tab.umeng_event" v-for="tab in tabs">
-        <ul
-          v-infinite-scroll="loadMore"
-          infinite-scroll-disabled="loading"
-          infinite-scroll-distance="10">
-          <li v-for="jl in jokeList.data" :key="jl.group?jl.group.id: jl.ad.id">
-            <div v-if="jl.type!=5">
-              <div class="joke-header">
-                <div class="joke-label" v-show="jl.group.label==1||jl.group.label==64">{{label[jl.group.label]}}</div>
-                <div class="user-img">
-                  <img :src="jl.group.user.avatar_url">
-                </div>
-                <div class="user-name">
-                  {{jl.group.user.name}}
-                </div>
-                <div class="dislike" v-show="jl.group.allow_dislike" @click="dislike">X</div>
+    <ul class="loadmore" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="150">
+      <li v-for="jl in jokeList.data" :key="jl.group?jl.group.id: jl.ad.id">
+        <div v-if="jl.type!=5">
+          <div class="joke-header">
+            <div class="joke-label" v-show="jl.group.label==1||jl.group.label==64">{{label[jl.group.label]}}</div>
+            <div class="user-img">
+              <img :src="jl.group.user.avatar_url">
+            </div>
+            <div class="user-name">
+              {{jl.group.user.name}}
+            </div>
+            <div class="dislike" v-show="jl.group.allow_dislike" @click="dislike">X</div>
+          </div>
+          <div class="joke-content">
+            <div class="joke-content-text">
+              {{jl.group.content}}
+              <span class="category_name">{{jl.group.category_name}}</span>
+            </div>
+            <div class="joke-content-media">
+              <div class="jk-content-img" v-if="jl.group.media_type==1 || jl.group.media_type == 2">
+                <img :src="jl.group.large_image.url_list[0].url" alt=""/>
               </div>
-              <div class="joke-content">
-                <div class="joke-content-text">
-                  {{jl.group.content}}
-                  <span class="category_name">{{jl.group.category_name}}</span>
-                </div>
-                <div class="joke-content-media">
-                  <div class="jk-content-img" v-if="jl.group.media_type==1 || jl.group.media_type == 2">
-                    <img :src="jl.group.large_image.url_list[0].url" alt=""/>
-                  </div>
-                  <div class="jk-content-video" v-else-if="jl.group.media_type==3">
-                    <p class="jk-video-desc">{{jl.group.play_count | wan}}播放</p>
+              <div class="jk-content-video" v-else-if="jl.group.media_type==3">
+                <p class="jk-video-desc">{{jl.group.play_count | wan}}播放</p>
 
-                    <video class="jk-video" preload="none" :src="jl.group.mp4_url" controls :poster="jl.group.large_cover.url_list[0].url">
-                    </video>
-                  </div>
-                  <div class="jk-content-imgs" v-else-if="jl.group.media_type==4">
-                    <img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url" alt=""/>
-                  </div>
-                </div>
-                <div class="joke-comment">
-                  <span class="digg">{{jl.group.digg_count | wan}}</span>
-                  <span class="bury">{{jl.group.bury_count | wan}}</span>
-                  <span class="comment">{{jl.group.comment_count | wan}}</span>
-                  <span class="share">{{jl.group.share_count | wan}}</span>
-                </div>
+                <video class="jk-video" preload="none" :src="jl.group.mp4_url" controls
+                       :poster="jl.group.large_cover.url_list[0].url">
+                </video>
+              </div>
+              <div class="jk-content-imgs" v-else-if="jl.group.media_type==4">
+                <img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url" alt=""/>
               </div>
             </div>
-            <div v-else>
-              <div class="joke-content">
-                <div class="joke-header">
-                  <div class="joke-label">广告</div>
-                  <div class="user-img">
-                    <img :src="jl.ad.avatar_url">
-                  </div>
-                  <div class="user-name">
-                    {{jl.ad.avatar_name}}
-                  </div>
-                  <div class="dislike" @click="dislike">X</div>
-                </div>
-                <div class="joke-content-text">
-                  {{jl.ad.title}}
-                </div>
-                <div class="joke-content-media">
-                  <img :src="jl.ad.display_image"/>
-                </div>
-                <div class="joke-ad-download">
-                  <span>{{jl.ad.avatar_name}}</span>
-                  <a :href="jl.ad.download_url">{{jl.ad.button_text}}</a>
-                </div>
-              </div>
+            <div class="joke-comment">
+              <span class="digg">{{jl.group.digg_count | wan}}</span>
+              <span class="bury">{{jl.group.bury_count | wan}}</span>
+              <span class="comment">{{jl.group.comment_count | wan}}</span>
+              <span class="share">{{jl.group.share_count | wan}}</span>
             </div>
-          </li>
-        </ul>
-
-      </mt-tab-container-item>
-    </mt-tab-container>
+          </div>
+        </div>
+        <div v-else>
+          <div class="joke-content">
+            <div class="joke-header">
+              <div class="joke-label">广告</div>
+              <div class="user-img">
+                <img :src="jl.ad.avatar_url">
+              </div>
+              <div class="user-name">
+                {{jl.ad.avatar_name}}
+              </div>
+              <div class="dislike" @click="dislike">X</div>
+            </div>
+            <div class="joke-content-text">
+              {{jl.ad.title}}
+            </div>
+            <div class="joke-content-media">
+              <img :src="jl.ad.display_image"/>
+            </div>
+            <div class="joke-ad-download">
+              <span>{{jl.ad.avatar_name}}</span>
+              <a :href="jl.ad.download_url">{{jl.ad.button_text}}</a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 <style scoped lang="scss">
   @import "../../assets/scss/mixin";
+
   .home-page {
     background: #ccc;
     li {
@@ -230,11 +203,11 @@
           margin-right: 20px;
         }
         .comment {
-         @include setBack('../../assets/img/comment.png');
+          @include setBack('../../assets/img/comment.png');
           flex: 1;
         }
         .share {
-         @include setBack('../../assets/img/share.png');
+          @include setBack('../../assets/img/share.png');
         }
       }
     }
@@ -243,9 +216,11 @@
   .tab-item {
     font-size: 16px;
   }
-  .mint-tab-container {
+
+  .loadmore {
     padding-top: 45px;
   }
+
   .mint-navbar {
     display: block;
     background: #eee;
@@ -266,7 +241,7 @@
       padding: 8px 10px;
       display: inline-block;
       .mint-tab-item-label {
-        font-size: 16px;
+        font-size: 16px !important;
       }
     }
   }
@@ -277,19 +252,21 @@
   export default{
     data(){
       return {
-        loading: false,
         label: {
           1: "热门",
           64: "同城",
         },
-        labelArr: [1, 64]
+        allLoaded: false,
+        labelArr: [1, 64],
+        loading: false,
+        count: 0
       }
     },
     computed: {
       ...mapGetters({
         'tabs': 'tabs',
         selected: 'defaultTab',
-        jokeList: 'jokeList'
+        jokeList: 'jokeList',
       })
     },
     components: {
@@ -301,7 +278,8 @@
       ...mapActions([
         'getHomeTabs',
         'changeDefault',
-        'getJoke'
+        'getJoke',
+        'setLoading'
       ]),
       changeLi(li) {
         this.changeDefault(li);
@@ -311,25 +289,25 @@
         alert('dislike')
       },
       loadMore() {
-        let self = this;
-        this.loading = true;
-//        setTimeout(() => {
-//          let last = self.jokeList.data[self.jokeList.data.length - 1];
-//          for (let i = 1; i <= 10; i++) {
-//            self.jokeList.data.push(last + i);
-//          }
-//          self.loading = false;
-//        }, 2500);
+//        this.loading = true;
+        /*this.getJoke(this.selected).then(() => {
+         //          this.setLoading(false);
+         });*/
+//        this.getJoke('recommend');
+        if(this.count == 0) {
+          console.error(1)
+          this.count == 1
+        }
       }
     },
     created() {
       this.getHomeTabs();
-      this.getJoke('recommend');
+      this.getJoke(this.selected)
     },
     filters: {
-     wan(num) {
-       return num>=10000?(num/10000).toFixed(1)+'万':num;
-     }
+      wan(num) {
+        return num >= 10000 ? (num / 10000).toFixed(1) + '万' : num;
+      }
     }
   }
 </script>

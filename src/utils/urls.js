@@ -1,3 +1,25 @@
+/*
+   digg_count: 被赞数
+   bury_count: 被贬数
+   comment_count: 评论数
+   share_count: 转发数
+   category_name: 标签名
+   has_comments: 有无神评
+   play_count: 播放量
+   label {
+     1: 热门
+     64: 同城
+   }
+   media_type {
+     0: 文本,
+     1: 图片,
+     2: gif
+     3: 视频
+     4:多图
+   }
+*/
+
+
 //首页分类
 const HOME_TABS_URL = 'neihan/service/tabs/?iid=11545563570&os_version=10.3.2&os_api=18&live_sdk_version=220&channel=App%20Store&idfa=00000000-0000-0000-0000-000000000000&device_platform=iphone&app_name=joke_essay&vid=17F7C7D1-4F94-424B-9736-E832207E6815&openudid=e63821c4160821d71651b6b833b9cc9acb4e2114&device_type=iPhone%206S&device_id=16130043867&ac=WIFI&screen_width=750&aid=7&version_code=6.4.0&essence=1';
 //推荐

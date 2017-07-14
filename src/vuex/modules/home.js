@@ -7,17 +7,17 @@ import 'mint-ui/lib/spinner/style.css'
 export default {
   state: {
     tabs: [],
-    defaultTab: '',
-    jokeList: []
+    defaultTab: 'recommend',
+    jokeList: [],
   },
   getters: {
     tabs: state => state.tabs,
     defaultTab: state => state.defaultTab,
     jokeList: state => state.jokeList,
+    loading: state => state.loading
   },
   actions: {
     getHomeTabs ({commit}) {
-
       axios.get('/api'+urls.HOME_TABS_URL)
         .then((res) => {
           if(res.status === 200) {
@@ -32,6 +32,7 @@ export default {
       commit(types.CHANGE_DEFAULT, obj)
     },
     getJoke({commit}, type) {
+
       Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
@@ -71,12 +72,16 @@ export default {
           if(res.status === 200) {
             console.log(res.data.data)
             commit(types.JOKE_LIST, res.data.data);
+            commit(types.LOAD_MORE, !res.data.data.has_more);
             Indicator.close();
           }
         })
         .catch((err) => {
           console.log('list 接口出错')
         })
+    },
+    setLoading({commit}, status) {
+      commit(types.LOAD_MORE, status);
     }
   },
   mutations: {
@@ -98,5 +103,8 @@ export default {
     [types.JOKE_LIST](state, data) {
       state.jokeList = data
     },
+    [types.LOAD_MORE](state, status) {
+      state.loading = status;
+    }
   }
 }

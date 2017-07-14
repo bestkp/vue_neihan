@@ -10,7 +10,7 @@ import Routers from './router/index';
 // import VeeValidate, { Validator } from 'vee-validate';
 // import './assets/js/validators'
 // import messagesZH from './assets/js/zh_CN'
-// import 'mint-ui/lib/style.min.css'
+import 'mint-ui/lib/style.min.css'
 const RouterConfig = {
   linkActiveClass: 'active',
   mode: 'history',
