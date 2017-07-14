@@ -1,12 +1,11 @@
-# newnet_admin
+# vue_neihan
 
-> new vuejs project
 > 该项目使用的是在vue-cli基础上，增加:
->1. vuex
->2. iview
->3. vee-validate
->4. aixos
->5. 接口跨域解决
+> 1. vuex
+> 2. iview/mint-ui
+> 3. vee-validate
+> 4. aixos
+> 5. 接口跨域解决
 ## Build Setup
 
 ``` bash
@@ -31,7 +30,7 @@ npm run e2e
 # run all tests
 npm test
 ``` 
-##*项目相关图片展示*
+##项目相关图片展示
 1. ![view](./src/assets/img/view_0714.gif "百度logo") 
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

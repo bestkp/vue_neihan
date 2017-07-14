@@ -187,9 +187,9 @@
           display: flex;
           flex-wrap: wrap;
           img {
-            width: 30%;
+            width: 32%;
             height: 30%;
-            margin-right: 10px;
+            margin-right: 2%;
             box-sizing: border-box;
             margin-bottom: 10px;
             &:nth-child(3n) {
