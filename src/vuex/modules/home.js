@@ -1,6 +1,9 @@
 import * as types from '../types'
 import axios from 'axios'
 import urls from '../../utils/urls'
+import { Indicator } from 'mint-ui';
+import 'mint-ui/lib/indicator/style.css'
+import 'mint-ui/lib/spinner/style.css'
 export default {
   state: {
     tabs: [],
@@ -14,6 +17,7 @@ export default {
   },
   actions: {
     getHomeTabs ({commit}) {
+
       axios.get('/api'+urls.HOME_TABS_URL)
         .then((res) => {
           if(res.status === 200) {
@@ -28,6 +32,10 @@ export default {
       commit(types.CHANGE_DEFAULT, obj)
     },
     getJoke({commit}, type) {
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      });
       let url = '/api';
       switch (type) {
         case 'recommend': {
@@ -63,6 +71,7 @@ export default {
           if(res.status === 200) {
             console.log(res.data.data)
             commit(types.JOKE_LIST, res.data.data);
+            Indicator.close();
           }
         })
         .catch((err) => {

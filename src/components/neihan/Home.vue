@@ -54,13 +54,20 @@
                     <img :src="jl.group.large_image.url_list[0].url" alt=""/>
                   </div>
                   <div class="jk-content-video" v-else-if="jl.group.media_type==3">
+                    <p class="jk-video-desc">{{jl.group.play_count | wan}}播放</p>
+
                     <video class="jk-video" preload="none" :src="jl.group.mp4_url" controls :poster="jl.group.large_cover.url_list[0].url">
-                      <p class="jk-video-desc">{{jl.group.play_count}}播放</p>
                     </video>
                   </div>
                   <div class="jk-content-imgs" v-else-if="jl.group.media_type==4">
                     <img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url" alt=""/>
                   </div>
+                </div>
+                <div class="joke-comment">
+                  <span class="digg">{{jl.group.digg_count | wan}}</span>
+                  <span class="bury">{{jl.group.bury_count | wan}}</span>
+                  <span class="comment">{{jl.group.comment_count | wan}}</span>
+                  <span class="share">{{jl.group.share_count | wan}}</span>
                 </div>
               </div>
             </div>
@@ -96,6 +103,7 @@
   </div>
 </template>
 <style scoped lang="scss">
+  @import "../../assets/scss/mixin";
   .home-page {
     background: #ccc;
     li {
@@ -160,13 +168,19 @@
         }
         .jk-content-video {
           width: 100%;
+          .jk-video-desc {
+            font-size: 14px;
+            color: #fff;
+            line-height: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            padding: 0 10px;
+            width: 100%;
+            box-sizing: border-box;
+          }
           .jk-video {
             width: 100%;
-            position: relative;
-            .jk-video-desc {
-              background: #000;
-              color: #fff;
-            }
           }
         }
         .jk-content-imgs {
@@ -199,18 +213,48 @@
           }
         }
       }
+      .joke-comment {
+        background: #fff;
+        font-size: 12px;
+        color: #666;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .digg {
+          @include setBack('../../assets/img/digg.png')
+          margin-right: 20px;
+        }
+        .bury {
+          @include setBack('../../assets/img/bury.png');
+          margin-right: 20px;
+        }
+        .comment {
+         @include setBack('../../assets/img/comment.png');
+          flex: 1;
+        }
+        .share {
+         @include setBack('../../assets/img/share.png');
+        }
+      }
     }
   }
 
   .tab-item {
     font-size: 16px;
   }
-
+  .mint-tab-container {
+    padding-top: 45px;
+  }
   .mint-navbar {
     display: block;
     background: #eee;
     overflow-x: auto;
     white-space: nowrap;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    height: 45px;
     a {
       &:hover {
         text-decoration: none;
@@ -219,7 +263,7 @@
         color: #00a0e9;
         border-bottom: 3px solid #00a0e9;
       }
-      padding: 10px;
+      padding: 8px 10px;
       display: inline-block;
       .mint-tab-item-label {
         font-size: 16px;
@@ -281,6 +325,11 @@
     created() {
       this.getHomeTabs();
       this.getJoke('recommend');
+    },
+    filters: {
+     wan(num) {
+       return num>=10000?(num/10000).toFixed(1)+'万':num;
+     }
     }
   }
 </script>

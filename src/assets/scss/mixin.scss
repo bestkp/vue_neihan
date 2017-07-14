@@ -1,0 +1,7 @@
+@mixin setBack($src) {
+  background-size: auto 90%;
+  background-position: left center;
+  padding-left: 20px;
+  background-image: url($src);
+  background-repeat: no-repeat;
+}

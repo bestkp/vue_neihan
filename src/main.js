@@ -22,19 +22,11 @@ const router = new VueRouter(RouterConfig);
 Vue.use(VueRouter);
 Vue.use(Mint);
 router.beforeEach((to, from, next) => {
-  // LoadingBar.start();
-  Mint.Indicator.open({
-    spinnerType: 'fading-circle'
-  });
   Util.title(to.meta.title);
   next();
 });
 
 router.afterEach((to, from, next) => {
-  // LoadingBar.finish();
-  setTimeout(() => {
-    Mint.Indicator.close();
-  })
   window.scrollTo(0, 0);
 });
 
