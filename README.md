@@ -30,6 +30,8 @@ npm run e2e
 
 # run all tests
 npm test
-```
+``` 
+##*项目相关图片展示*
+1. ![view](./src/assets/img/view_0714.gif "百度logo") 
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
