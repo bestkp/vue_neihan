@@ -5,7 +5,7 @@
         {{tab.name}}
       </mt-tab-item>
     </mt-navbar>
-    <ul class="loadmore" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="150">
+    <ul class="loadmore" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0" infinite-scroll-immediate-check="false">
       <li v-for="jl in jokeList.data" :key="jl.group?jl.group.id: jl.ad.id">
         <div v-if="jl.type!=5">
           <div class="joke-header">
@@ -294,10 +294,9 @@
          //          this.setLoading(false);
          });*/
 //        this.getJoke('recommend');
-        if(this.count == 0) {
-          console.error(1)
-          this.count == 1
-        }
+        this.loading=true;
+        this.getJoke('recommend')
+//        this.loading = false;
       }
     },
     created() {
