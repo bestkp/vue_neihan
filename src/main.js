@@ -3,14 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import store from './vuex/store';
-import Mint from 'mint-ui';
 import VueRouter from 'vue-router';
+import Vuex from 'Vuex';
 import Util from './utils/util';
 import Routers from './router/index';
-// import VeeValidate, { Validator } from 'vee-validate';
-// import './assets/js/validators'
-// import messagesZH from './assets/js/zh_CN'
-import 'mint-ui/lib/style.min.css'
 const RouterConfig = {
   linkActiveClass: 'active',
   mode: 'history',
@@ -18,29 +14,24 @@ const RouterConfig = {
 };
 const router = new VueRouter(RouterConfig);
 
-// import * as filters from './util/filter'
 Vue.use(VueRouter);
-Vue.use(Mint);
-router.beforeEach((to, from, next) => {
-  Util.title(to.meta.title);
-  next();
-});
+Vue.use(Vuex);
 
-router.afterEach((to, from, next) => {
+router.beforeEach(function (to, from, next) {
+  next(vm => {
+    console.error(22222)
+    vm.$store.commit('updateLoadingStatus', {isLoading: true})
+    Util.title(to.meta.title);
+  })
+
+})
+
+router.afterEach(function (to) {
+  this.$store.commit('updateLoadingStatus', {isLoading: false})
   window.scrollTo(0, 0);
-});
+})
 
-//vee-validate
-// Vue.use(VeeValidate);
-// Validator.setLocale('zh');
-// const dictionary = {
-//   zh: {
-//     messages:messagesZH.messages
-//   },
-// };
-// Validator.updateDictionary(dictionary);
 Vue.config.productionTip = false
-// Object.keys(filters).forEach(k => Vue.filter(k, filters[k])) //注册过滤器
 new Vue({
   el: '#app',
   router,

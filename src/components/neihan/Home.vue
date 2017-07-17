@@ -1,11 +1,12 @@
 <template>
   <div class="home-page">
-    <mt-navbar v-model="selected">
-      <mt-tab-item class="tab-item" v-for="tab in tabs" :id="tab.umeng_event" @click.native="changeLi(tab)">
-        {{tab.name}}
-      </mt-tab-item>
-    </mt-navbar>
-    <ul class="loadmore" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="150">
+    <div class="mint-navbar" style="width: 100%;overflow:auto;-webkit-overflow-scrolling:touch;">
+      <tab active-color='#fc378c' bar-active-color="#fc378c">
+        <tab-item  class="tab-item" :selected="selected === tab.umeng_event"  v-for="tab in tabs" :id="tab.umeng_event" @click.native="changeLi(tab)">{{tab.name}}</tab-item>
+      </tab>
+    </div>
+
+    <ul class="loadmore" >
       <li v-for="jl in jokeList.data" :key="jl.group?jl.group.id: jl.ad.id">
         <div v-if="jl.type!=5">
           <div class="joke-header">
@@ -248,7 +249,8 @@
 </style>
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import {Navbar, TabItem, InfiniteScroll} from 'mint-ui';
+  import Tab from 'vux/src/components/tab/tab.vue'
+  import TabItem from 'vux/src/components/tab/tab-item.vue'
   export default{
     data(){
       return {
@@ -258,8 +260,6 @@
         },
         allLoaded: false,
         labelArr: [1, 64],
-        loading: false,
-        count: 0
       }
     },
     computed: {
@@ -267,12 +267,21 @@
         'tabs': 'tabs',
         selected: 'defaultTab',
         jokeList: 'jokeList',
+        loading: 'loading'
       })
     },
     components: {
-      Navbar,
-      TabItem,
-      InfiniteScroll
+      Tab,
+      TabItem
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        window.addEventListener('scroll', vm.scrollJokeList, false)
+      })
+    },
+    beforeRouteLeave(to, from, next) {
+      window.removeEventListener("scroll", this.scrollJokeList, false)
+      next()
     },
     methods: {
       ...mapActions([
@@ -288,21 +297,26 @@
       dislike() {
         alert('dislike')
       },
-      loadMore() {
-//        this.loading = true;
-        /*this.getJoke(this.selected).then(() => {
-         //          this.setLoading(false);
-         });*/
-//        this.getJoke('recommend');
-        if(this.count == 0) {
-          console.error(1)
-          this.count == 1
+      scrollJokeList () {
+        var scrollTop = document.body.scrollTop;
+        if(scrollTop + window.innerHeight >= document.body.clientHeight) {
+          // 触发加载数据
+          debugger
+          if(!this.loading) {
+            this.getJoke(this.selected);
+          }
         }
+//          this.setLoading(true);
+//          this.getJoke(this.selected);
       }
     },
     created() {
       this.getHomeTabs();
-      this.getJoke(this.selected)
+      if(this.jokeList.length == 0){
+        this.getJoke(this.selected);
+      }
+
+//      this.getJoke(this.selected)
     },
     filters: {
       wan(num) {

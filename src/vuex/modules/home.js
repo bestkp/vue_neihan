@@ -1,7 +1,6 @@
 import * as types from '../types'
 import axios from 'axios'
 import urls from '../../utils/urls'
-import { Indicator } from 'mint-ui';
 import 'mint-ui/lib/indicator/style.css'
 import 'mint-ui/lib/spinner/style.css'
 export default {
@@ -9,6 +8,7 @@ export default {
     tabs: [],
     defaultTab: 'recommend',
     jokeList: [],
+    loading: false
   },
   getters: {
     tabs: state => state.tabs,
@@ -31,12 +31,9 @@ export default {
     changeDefault ({commit}, obj) {
       commit(types.CHANGE_DEFAULT, obj)
     },
-    getJoke({commit}, type) {
+    getJoke({commit,state}, type) {
+      commit(types.LOAD_MORE, true);
 
-      Indicator.open({
-        text: '加载中...',
-        spinnerType: 'fading-circle'
-      });
       let url = '/api';
       switch (type) {
         case 'recommend': {
@@ -69,15 +66,14 @@ export default {
       }
       axios.get(url)
         .then((res) => {
-          if(res.status === 200) {
-            console.log(res.data.data)
+          if (res.status === 200) {
+            console.log(res.data.data);
             commit(types.JOKE_LIST, res.data.data);
-            commit(types.LOAD_MORE, !res.data.data.has_more);
-            Indicator.close();
+            commit(types.LOAD_MORE, false);//!res.data.data.has_more);
           }
         })
         .catch((err) => {
-          console.log('list 接口出错')
+          console.log('list 接口出错');
         })
     },
     setLoading({commit}, status) {
