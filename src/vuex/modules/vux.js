@@ -12,7 +12,6 @@ export default {
   },
   mutations: {
     updateLoadingStatus (state, payload) {
-      debugger
       state.isLoading = payload.isLoading
     }
   }

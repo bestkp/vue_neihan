@@ -29,6 +29,11 @@
         msg:'hello world'
       }
     },
+    computed: {
+      ...mapState({
+        isLoading: state => state.vux.isLoading
+      })
+    },
     components: {
       HeaderView,
       Loading
