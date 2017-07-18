@@ -27,6 +27,7 @@ export default {
         })
     },
     changeDefault ({commit}, obj) {
+      commit('clearList', []);
       commit(types.CHANGE_DEFAULT, obj);
       commit('updateLoadingStatus', {isLoading: false});
     },
@@ -102,6 +103,9 @@ export default {
     },
     updateLoadingStatus (state, payload) {
       state.isLoading = payload.isLoading
+    },
+    clearList(state, arr) {
+      state.jokeList = [];
     }
   }
 }

@@ -9,9 +9,7 @@
     </div>
 
     <ul class="loadmore">
-      <scroller
-        :on-refresh="refresh"
-        :on-infinite="infinite" style="padding-top: 40px;">
+
         <li v-for="jl in jokeList" :key="jl.group?jl.group.id: jl.ad.id">
           <div v-if="jl.type!=5">
             <div class="joke-header">
@@ -77,7 +75,9 @@
             </div>
           </div>
         </li>
-      </scroller>
+      <mugen-scroll :handler="fetchData" :should-handle="!loading" style="background: #fff;color: #333;text-align:center;">
+        加载中...
+      </mugen-scroll>
     </ul>
   </div>
 </template>
@@ -127,7 +127,7 @@
       }
       .joke-content {
         line-height: 1.5;
-        font-size: 16px;
+        font-size: 14px;
         .category_name {
           font-size: 12px;
           color: #5a0700;
@@ -257,6 +257,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import Tab from 'vux/src/components/tab/tab.vue'
   import TabItem from 'vux/src/components/tab/tab-item.vue'
+  import MugenScroll from 'vue-mugen-scroll'
   export default{
     data(){
       return {
@@ -265,20 +266,22 @@
           64: "同城",
         },
         allLoaded: false,
-        labelArr: [1, 64]
+        labelArr: [1, 64],
+        loading: false,
+
       }
     },
     computed: {
       ...mapGetters({
         'tabs': 'tabs',
         selected: 'defaultTab',
-        loading: 'loading',
         jokeList: 'jokeList'
       })
     },
     components: {
       Tab,
-      TabItem
+      TabItem,
+      MugenScroll
     },
     methods: {
       ...mapActions([
@@ -295,14 +298,10 @@
       dislike() {
         alert('dislike')
       },
-      refresh(done) {
-
-        done();
-      },
-      infinite(done) {
-        var self = this;
-//        self.getJoke(this.selected);
-        done();
+      fetchData() {
+        this.loading = true;
+        this.getJoke(this.selected);
+        this.loading = false
       }
     },
     created() {
