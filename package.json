@@ -22,9 +22,11 @@
     "vee-validate": "^2.0.0-rc.3",
     "vue": "^2.3.4",
     "vue-router": "^2.2.0",
+    "vue-scroller": "^2.2.1",
     "vue-spinner": "^1.0.2",
     "vuerify": "^0.4.0",
-    "vuex": "^2.1.2"
+    "vuex": "^2.1.2",
+    "vux": "^2.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -43,6 +45,7 @@
     "cross-env": "^3.1.4",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.26.4",
+    "eslint-friendly-formatter": "^3.0.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0",
@@ -79,6 +82,7 @@
     "vue-loader": "^11.1.4",
     "vue-style-loader": "^2.0.0",
     "vue-template-compiler": "^2.2.4",
+    "vux-loader": "^1.1.2",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
@@ -90,8 +94,7 @@
     "npm": ">= 3.0.0"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
+    "iOS >= 7",
+    "Android >= 4.1"
   ]
 }

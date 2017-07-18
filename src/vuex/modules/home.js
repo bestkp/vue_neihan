@@ -1,14 +1,12 @@
 import * as types from '../types'
 import axios from 'axios'
 import urls from '../../utils/urls'
-import { Indicator } from 'mint-ui';
-import 'mint-ui/lib/indicator/style.css'
-import 'mint-ui/lib/spinner/style.css'
 export default {
   state: {
     tabs: [],
     defaultTab: 'recommend',
     jokeList: [],
+    loading: false
   },
   getters: {
     tabs: state => state.tabs,
@@ -18,9 +16,9 @@ export default {
   },
   actions: {
     getHomeTabs ({commit}) {
-      axios.get('/api'+urls.HOME_TABS_URL)
+      axios.get('/api' + urls.HOME_TABS_URL)
         .then((res) => {
-          if(res.status === 200) {
+          if (res.status === 200) {
             commit(types.HOME_TABS, res.data.data);
           }
         })
@@ -29,14 +27,11 @@ export default {
         })
     },
     changeDefault ({commit}, obj) {
-      commit(types.CHANGE_DEFAULT, obj)
+      commit(types.CHANGE_DEFAULT, obj);
+      commit('updateLoadingStatus', {isLoading: false});
     },
     getJoke({commit}, type) {
-
-      Indicator.open({
-        text: '加载中...',
-        spinnerType: 'fading-circle'
-      });
+      commit(types.LOAD_MORE, true);
       let url = '/api';
       switch (type) {
         case 'recommend': {
@@ -69,15 +64,14 @@ export default {
       }
       axios.get(url)
         .then((res) => {
-          if(res.status === 200) {
-            console.log(res.data.data)
+          if (res.status === 200) {
+            console.log(res.data.data);
             commit(types.JOKE_LIST, res.data.data);
-            commit(types.LOAD_MORE, !res.data.data.has_more);
-            Indicator.close();
+            commit(types.LOAD_MORE, false);//!res.data.data.has_more);
           }
         })
         .catch((err) => {
-          console.log('list 接口出错')
+          console.log('list 接口出错');
         })
     },
     setLoading({commit}, status) {
@@ -87,8 +81,8 @@ export default {
   mutations: {
     [types.HOME_TABS](state, data) {
       state.tabs = data;
-      for(let da in data) {
-        if(data[da].is_default_tab === true) {
+      for (let da in data) {
+        if (data[da].is_default_tab === true) {
           state.defaultTab = data[da].umeng_event;
           break
         }
@@ -101,10 +95,13 @@ export default {
       state.defaultTab = o.umeng_event;
     },
     [types.JOKE_LIST](state, data) {
-      state.jokeList = data
+      state.jokeList = state.jokeList.concat(data.data)
     },
     [types.LOAD_MORE](state, status) {
       state.loading = status;
+    },
+    updateLoadingStatus (state, payload) {
+      state.isLoading = payload.isLoading
     }
   }
 }

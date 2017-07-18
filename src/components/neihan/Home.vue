@@ -1,76 +1,83 @@
 <template>
   <div class="home-page">
-    <mt-navbar v-model="selected">
-      <mt-tab-item class="tab-item" v-for="tab in tabs" :id="tab.umeng_event" @click.native="changeLi(tab)">
-        {{tab.name}}
-      </mt-tab-item>
-    </mt-navbar>
-    <ul class="loadmore" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0" infinite-scroll-immediate-check="false">
-      <li v-for="jl in jokeList.data" :key="jl.group?jl.group.id: jl.ad.id">
-        <div v-if="jl.type!=5">
-          <div class="joke-header">
-            <div class="joke-label" v-show="jl.group.label==1||jl.group.label==64">{{label[jl.group.label]}}</div>
-            <div class="user-img">
-              <img :src="jl.group.user.avatar_url">
-            </div>
-            <div class="user-name">
-              {{jl.group.user.name}}
-            </div>
-            <div class="dislike" v-show="jl.group.allow_dislike" @click="dislike">X</div>
-          </div>
-          <div class="joke-content">
-            <div class="joke-content-text">
-              {{jl.group.content}}
-              <span class="category_name">{{jl.group.category_name}}</span>
-            </div>
-            <div class="joke-content-media">
-              <div class="jk-content-img" v-if="jl.group.media_type==1 || jl.group.media_type == 2">
-                <img :src="jl.group.large_image.url_list[0].url" alt=""/>
-              </div>
-              <div class="jk-content-video" v-else-if="jl.group.media_type==3">
-                <p class="jk-video-desc">{{jl.group.play_count | wan}}播放</p>
+    <div class="mint-navbar" style="width: 100%;overflow:auto;-webkit-overflow-scrolling:touch;">
+      <tab active-color='#fc378c' bar-active-color="#fc378c">
+        <tab-item class="tab-item" :selected="selected === tab.umeng_event" v-for="tab in tabs" :id="tab.umeng_event"
+                  @click.native="changeLi(tab)">{{tab.name}}
+        </tab-item>
+      </tab>
+    </div>
 
-                <video class="jk-video" preload="none" :src="jl.group.mp4_url" controls
-                       :poster="jl.group.large_cover.url_list[0].url">
-                </video>
-              </div>
-              <div class="jk-content-imgs" v-else-if="jl.group.media_type==4">
-                <img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url" alt=""/>
-              </div>
-            </div>
-            <div class="joke-comment">
-              <span class="digg">{{jl.group.digg_count | wan}}</span>
-              <span class="bury">{{jl.group.bury_count | wan}}</span>
-              <span class="comment">{{jl.group.comment_count | wan}}</span>
-              <span class="share">{{jl.group.share_count | wan}}</span>
-            </div>
-          </div>
-        </div>
-        <div v-else>
-          <div class="joke-content">
+    <ul class="loadmore">
+      <scroller
+        :on-refresh="refresh"
+        :on-infinite="infinite" style="padding-top: 40px;">
+        <li v-for="jl in jokeList" :key="jl.group?jl.group.id: jl.ad.id">
+          <div v-if="jl.type!=5">
             <div class="joke-header">
-              <div class="joke-label">广告</div>
+              <div class="joke-label" v-show="jl.group.label==1||jl.group.label==64">{{label[jl.group.label]}}</div>
               <div class="user-img">
-                <img :src="jl.ad.avatar_url">
+                <img :src="jl.group.user.avatar_url">
               </div>
               <div class="user-name">
-                {{jl.ad.avatar_name}}
+                {{jl.group.user.name}}
               </div>
-              <div class="dislike" @click="dislike">X</div>
+              <div class="dislike" v-show="jl.group.allow_dislike" @click="dislike">X</div>
             </div>
-            <div class="joke-content-text">
-              {{jl.ad.title}}
-            </div>
-            <div class="joke-content-media">
-              <img :src="jl.ad.display_image"/>
-            </div>
-            <div class="joke-ad-download">
-              <span>{{jl.ad.avatar_name}}</span>
-              <a :href="jl.ad.download_url">{{jl.ad.button_text}}</a>
+            <div class="joke-content">
+              <div class="joke-content-text">
+                {{jl.group.content}}
+                <span class="category_name">{{jl.group.category_name}}</span>
+              </div>
+              <div class="joke-content-media">
+                <div class="jk-content-img" v-if="jl.group.media_type==1 || jl.group.media_type == 2">
+                  <img :src="jl.group.large_image.url_list[0].url" alt=""/>
+                </div>
+                <div class="jk-content-video" v-else-if="jl.group.media_type==3">
+                  <p class="jk-video-desc">{{jl.group.play_count | wan}}播放</p>
+
+                  <video class="jk-video" preload="none" :src="jl.group.mp4_url" controls
+                         :poster="jl.group.large_cover.url_list[0].url">
+                  </video>
+                </div>
+                <div class="jk-content-imgs" v-else-if="jl.group.media_type==4">
+                  <img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url" alt=""/>
+                </div>
+              </div>
+              <div class="joke-comment">
+                <span class="digg">{{jl.group.digg_count | wan}}</span>
+                <span class="bury">{{jl.group.bury_count | wan}}</span>
+                <span class="comment">{{jl.group.comment_count | wan}}</span>
+                <span class="share">{{jl.group.share_count | wan}}</span>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
+          <div v-else>
+            <div class="joke-content">
+              <div class="joke-header">
+                <div class="joke-label">广告</div>
+                <div class="user-img">
+                  <img :src="jl.ad.avatar_url">
+                </div>
+                <div class="user-name">
+                  {{jl.ad.avatar_name}}
+                </div>
+                <div class="dislike" @click="dislike">X</div>
+              </div>
+              <div class="joke-content-text">
+                {{jl.ad.title}}
+              </div>
+              <div class="joke-content-media">
+                <img :src="jl.ad.display_image"/>
+              </div>
+              <div class="joke-ad-download">
+                <span>{{jl.ad.avatar_name}}</span>
+                <a :href="jl.ad.download_url">{{jl.ad.button_text}}</a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </scroller>
     </ul>
   </div>
 </template>
@@ -248,7 +255,8 @@
 </style>
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import {Navbar, TabItem, InfiniteScroll} from 'mint-ui';
+  import Tab from 'vux/src/components/tab/tab.vue'
+  import TabItem from 'vux/src/components/tab/tab-item.vue'
   export default{
     data(){
       return {
@@ -257,22 +265,20 @@
           64: "同城",
         },
         allLoaded: false,
-        labelArr: [1, 64],
-        loading: false,
-        count: 0
+        labelArr: [1, 64]
       }
     },
     computed: {
       ...mapGetters({
         'tabs': 'tabs',
         selected: 'defaultTab',
-        jokeList: 'jokeList',
+        loading: 'loading',
+        jokeList: 'jokeList'
       })
     },
     components: {
-      Navbar,
-      TabItem,
-      InfiniteScroll
+      Tab,
+      TabItem
     },
     methods: {
       ...mapActions([
@@ -282,26 +288,27 @@
         'setLoading'
       ]),
       changeLi(li) {
+        this.$store.commit('updateLoadingStatus', {isLoading: true});
         this.changeDefault(li);
         this.getJoke(li.umeng_event);
       },
       dislike() {
         alert('dislike')
       },
-      loadMore() {
-//        this.loading = true;
-        /*this.getJoke(this.selected).then(() => {
-         //          this.setLoading(false);
-         });*/
-//        this.getJoke('recommend');
-        this.loading=true;
-        this.getJoke('recommend')
-//        this.loading = false;
+      refresh(done) {
+
+        done();
+      },
+      infinite(done) {
+        var self = this;
+//        self.getJoke(this.selected);
+        done();
       }
     },
     created() {
+    	window.scroll(0, 0)
       this.getHomeTabs();
-      this.getJoke(this.selected)
+      this.getJoke(this.selected);
     },
     filters: {
       wan(num) {

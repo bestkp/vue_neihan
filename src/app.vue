@@ -12,14 +12,16 @@
   }
 </style>
 <template>
-
   <div id="app">
     <transition name="slide-fade">
       <router-view></router-view>
     </transition>
+    <loading v-model="isLoading"></loading>
   </div>
 </template>
 <script>
+  import Loading from 'vux/src/components/loading'
+  import { mapState } from 'vuex'
   import HeaderView from './components/header.vue';
   export default {
     data() {
@@ -27,8 +29,15 @@
         msg:'hello world'
       }
     },
+    computed: {
+      ...mapState({
+        isLoading: state => state.vux.isLoading
+      })
+    },
     components: {
-      HeaderView
-    }
+      HeaderView,
+      Loading
+    },
+
   }
 </script>
