@@ -6,7 +6,6 @@ export default {
     tabs: [],
     defaultTab: 'recommend',
     jokeList: [],
-    loading: false
   },
   getters: {
     tabs: state => state.tabs,
@@ -27,11 +26,11 @@ export default {
         })
     },
     changeDefault ({commit}, obj) {
+      commit('clearList', []);
       commit(types.CHANGE_DEFAULT, obj);
-      commit('updateLoadingStatus', {isLoading: false});
+
     },
     getJoke({commit}, type) {
-      commit(types.LOAD_MORE, true);
       let url = '/api';
       switch (type) {
         case 'recommend': {
@@ -67,16 +66,13 @@ export default {
           if (res.status === 200) {
             console.log(res.data.data);
             commit(types.JOKE_LIST, res.data.data);
-            commit(types.LOAD_MORE, false);//!res.data.data.has_more);
+            commit('updateLoadingStatus', {isLoading: false});
           }
         })
         .catch((err) => {
           console.log('list 接口出错');
         })
     },
-    setLoading({commit}, status) {
-      commit(types.LOAD_MORE, status);
-    }
   },
   mutations: {
     [types.HOME_TABS](state, data) {
@@ -88,7 +84,6 @@ export default {
         }
         state.defaultTab = 0
       }
-
       console.log(data);
     },
     [types.CHANGE_DEFAULT](state, o) {
@@ -97,11 +92,11 @@ export default {
     [types.JOKE_LIST](state, data) {
       state.jokeList = state.jokeList.concat(data.data)
     },
-    [types.LOAD_MORE](state, status) {
-      state.loading = status;
-    },
     updateLoadingStatus (state, payload) {
       state.isLoading = payload.isLoading
+    },
+    clearList (state, arr) {
+      state.jokeList = [];
     }
   }
 }

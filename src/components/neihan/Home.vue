@@ -2,16 +2,12 @@
   <div class="home-page">
     <div class="mint-navbar" style="width: 100%;overflow:auto;-webkit-overflow-scrolling:touch;">
       <tab active-color='#fc378c' bar-active-color="#fc378c">
-        <tab-item class="tab-item" :selected="selected === tab.umeng_event" v-for="tab in tabs" :id="tab.umeng_event"
-                  @click.native="changeLi(tab)">{{tab.name}}
+        <tab-item class="tab-item" :selected="selected === tab.umeng_event" v-for="tab in tabs" :id="tab.umeng_event" @click.native="changeLi(tab)">{{tab.name}}
         </tab-item>
       </tab>
     </div>
 
     <ul class="loadmore">
-      <scroller
-        :on-refresh="refresh"
-        :on-infinite="infinite" style="padding-top: 40px;">
         <li v-for="jl in jokeList" :key="jl.group?jl.group.id: jl.ad.id">
           <div v-if="jl.type!=5">
             <div class="joke-header">
@@ -77,7 +73,8 @@
             </div>
           </div>
         </li>
-      </scroller>
+        <mugen-scroll :handler="fetchData" style="line-height: 30px;text-align: center;" :should-handle="!loading">
+        </mugen-scroll>
     </ul>
   </div>
 </template>
@@ -257,6 +254,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import Tab from 'vux/src/components/tab/tab.vue'
   import TabItem from 'vux/src/components/tab/tab-item.vue'
+  import MugenScroll from 'vue-mugen-scroll'
   export default{
     data(){
       return {
@@ -265,20 +263,21 @@
           64: "同城",
         },
         allLoaded: false,
-        labelArr: [1, 64]
+        labelArr: [1, 64],
+        loading: false
       }
     },
     computed: {
       ...mapGetters({
         'tabs': 'tabs',
         selected: 'defaultTab',
-        loading: 'loading',
         jokeList: 'jokeList'
       })
     },
     components: {
       Tab,
-      TabItem
+      TabItem,
+      MugenScroll
     },
     methods: {
       ...mapActions([
@@ -295,14 +294,10 @@
       dislike() {
         alert('dislike')
       },
-      refresh(done) {
-
-        done();
-      },
-      infinite(done) {
-        var self = this;
-//        self.getJoke(this.selected);
-        done();
+      fetchData() {
+        this.loading = true;
+        this.getJoke(this.selected);
+        this.loading = false
       }
     },
     created() {
