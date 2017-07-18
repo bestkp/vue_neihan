@@ -29,7 +29,7 @@ export default {
     changeDefault ({commit}, obj) {
       commit('clearList', []);
       commit(types.CHANGE_DEFAULT, obj);
-      commit('updateLoadingStatus', {isLoading: false});
+
     },
     getJoke({commit}, type) {
       commit(types.LOAD_MORE, true);
@@ -68,11 +68,12 @@ export default {
           if (res.status === 200) {
             console.log(res.data.data);
             commit(types.JOKE_LIST, res.data.data);
-            commit(types.LOAD_MORE, false);//!res.data.data.has_more);
+            commit('updateLoadingStatus', {isLoading: false});
           }
         })
         .catch((err) => {
           console.log('list 接口出错');
+          commit('updateLoadingStatus', {isLoading: false});
         })
     },
     setLoading({commit}, status) {
