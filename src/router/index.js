@@ -6,6 +6,7 @@ const routers = [
       title: '主页'
     },
     component: (resolve) => require(['../components/neihan/Main.vue'], resolve),
+    redirect: '/home',
     children: [
       {
         path: '/home',

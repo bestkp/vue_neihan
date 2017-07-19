@@ -2,20 +2,18 @@
   <div class="home-page">
     <div class="mint-navbar" style="width: 100%;overflow:auto;-webkit-overflow-scrolling:touch;">
       <tab active-color='#fc378c' bar-active-color="#fc378c">
-        <tab-item class="tab-item" :selected="selected === tab.umeng_event" v-for="tab in tabs" :id="tab.umeng_event"
-                  @click.native="changeLi(tab)">{{tab.name}}
+        <tab-item class="tab-item" :selected="selected === tab.umeng_event" v-for="tab in tabs" :id="tab.umeng_event" @click.native="changeLi(tab)">{{tab.name}}
         </tab-item>
       </tab>
     </div>
 
     <ul class="loadmore">
-
         <li v-for="jl in jokeList" :key="jl.group?jl.group.id: jl.ad.id">
           <div v-if="jl.type!=5">
             <div class="joke-header">
               <div class="joke-label" v-show="jl.group.label==1||jl.group.label==64">{{label[jl.group.label]}}</div>
               <div class="user-img">
-                <img :src="jl.group.user.avatar_url">
+                <img :src="jl.group.user.avatar_url" class="ximg-demo" error-class="ximg-error" :offset="-100"/>
               </div>
               <div class="user-name">
                 {{jl.group.user.name}}
@@ -29,7 +27,7 @@
               </div>
               <div class="joke-content-media">
                 <div class="jk-content-img" v-if="jl.group.media_type==1 || jl.group.media_type == 2">
-                  <img :src="jl.group.large_image.url_list[0].url" alt=""/>
+                    <x-img :src="jl.group.middle_image.url_list[0].url"  class="ximg-demo" error-class="ximg-error" :offset="-100"></x-img>
                 </div>
                 <div class="jk-content-video" v-else-if="jl.group.media_type==3">
                   <p class="jk-video-desc">{{jl.group.play_count | wan}}播放</p>
@@ -39,7 +37,7 @@
                   </video>
                 </div>
                 <div class="jk-content-imgs" v-else-if="jl.group.media_type==4">
-                  <img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url" alt=""/>
+                  <x-img v-for="simg in jl.group.thumb_image_list" :src="simg.url_list[0].url"  class="ximg-demo" error-class="ximg-error" :offset="-100"></x-img>
                 </div>
               </div>
               <div class="joke-comment">
@@ -66,7 +64,7 @@
                 {{jl.ad.title}}
               </div>
               <div class="joke-content-media">
-                <img :src="jl.ad.display_image"/>
+                <x-img :src="jl.ad.display_image"  class="ximg-demo" error-class="ximg-error" :offset="-100"></x-img>
               </div>
               <div class="joke-ad-download">
                 <span>{{jl.ad.avatar_name}}</span>
@@ -75,9 +73,8 @@
             </div>
           </div>
         </li>
-      <mugen-scroll :handler="fetchData" :should-handle="!loading" style="background: #fff;color: #333;text-align:center;">
-        加载中...
-      </mugen-scroll>
+        <mugen-scroll :handler="fetchData" style="line-height: 30px;text-align: center;" :should-handle="!loading">
+        </mugen-scroll>
     </ul>
   </div>
 </template>
@@ -258,6 +255,7 @@
   import Tab from 'vux/src/components/tab/tab.vue'
   import TabItem from 'vux/src/components/tab/tab-item.vue'
   import MugenScroll from 'vue-mugen-scroll'
+  import { XImg } from 'vux'
   export default{
     data(){
       return {
@@ -267,8 +265,7 @@
         },
         allLoaded: false,
         labelArr: [1, 64],
-        loading: false,
-
+        loading: false
       }
     },
     computed: {
@@ -281,7 +278,8 @@
     components: {
       Tab,
       TabItem,
-      MugenScroll
+      MugenScroll,
+      XImg
     },
     methods: {
       ...mapActions([
@@ -305,6 +303,7 @@
       }
     },
     created() {
+    	this.$store.commit('updateLoadingStatus', {isLoading: true});
     	window.scroll(0, 0)
       this.getHomeTabs();
       this.getJoke(this.selected);

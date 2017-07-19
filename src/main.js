@@ -16,7 +16,6 @@ const router = new VueRouter(RouterConfig);
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
-
 router.beforeEach(function (to, from, next) {
     router.app.$store.commit('updateLoadingStatus', {isLoading: true})
     Util.title(to.meta.title);

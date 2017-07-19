@@ -6,7 +6,6 @@ export default {
     tabs: [],
     defaultTab: 'recommend',
     jokeList: [],
-    loading: false
   },
   getters: {
     tabs: state => state.tabs,
@@ -32,7 +31,6 @@ export default {
 
     },
     getJoke({commit}, type) {
-      commit(types.LOAD_MORE, true);
       let url = '/api';
       switch (type) {
         case 'recommend': {
@@ -76,9 +74,6 @@ export default {
           commit('updateLoadingStatus', {isLoading: false});
         })
     },
-    setLoading({commit}, status) {
-      commit(types.LOAD_MORE, status);
-    }
   },
   mutations: {
     [types.HOME_TABS](state, data) {
@@ -90,7 +85,6 @@ export default {
         }
         state.defaultTab = 0
       }
-
       console.log(data);
     },
     [types.CHANGE_DEFAULT](state, o) {
@@ -99,13 +93,10 @@ export default {
     [types.JOKE_LIST](state, data) {
       state.jokeList = state.jokeList.concat(data.data)
     },
-    [types.LOAD_MORE](state, status) {
-      state.loading = status;
-    },
     updateLoadingStatus (state, payload) {
       state.isLoading = payload.isLoading
     },
-    clearList(state, arr) {
+    clearList (state, arr) {
       state.jokeList = [];
     }
   }
