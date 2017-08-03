@@ -1,20 +1,25 @@
 <template>
-    <div>
-        <div>发现</div>
-    </div>
+  <div>
+    <div>发现</div>
+  </div>
 </template>
 <style>
-    body{
-    }
+  body{
+  }
 </style>
 <script>
-    export default{
-        data(){
-            return{
-                msg:'hello vue'
-            }
-        },
-        components:{
-        }
+  import { Picker } from 'mint-ui';
+  import 'mint-ui/lib/picker/style.css'
+  export default{
+    data(){
+      return{
+        msg:'hello vue',
+      }
+    },
+    methods: {
+
+    },
+    components:{
     }
+  }
 </script>

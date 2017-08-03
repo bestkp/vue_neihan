@@ -22,7 +22,6 @@
 <script>
   import Loading from 'vux/src/components/loading'
   import { mapState } from 'vuex'
-  import HeaderView from './components/header.vue';
   export default {
     data() {
       return {
@@ -35,7 +34,6 @@
       })
     },
     components: {
-      HeaderView,
       Loading
     },
 
