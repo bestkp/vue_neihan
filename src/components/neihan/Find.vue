@@ -9,7 +9,6 @@
 </style>
 <script>
   import { Picker } from 'mint-ui';
-  import 'mint-ui/lib/picker/style.css'
   export default{
     data(){
       return{
